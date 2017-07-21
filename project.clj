@@ -6,6 +6,8 @@
                  [compojure "1.5.1"]
                  [c3p0/c3p0 "0.9.1.2"] ; Connection pool
                  [cheshire "4.0.3"] ; Json parsing librairy
+                 [org.clojure/java.jdbc "0.2.3"] ; jdbc support
+                 [com.h2database/h2 "1.3.168"] ; h2 database support
                  [com.novemberain/monger "3.0.1"] ; mongodb support
                  [ring/ring-json "0.1.2"]
                  [ring/ring-defaults "0.2.1"]] ; ring server default dependencies
