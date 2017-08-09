@@ -4,8 +4,8 @@
   (:use ring.util.response)
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
-            [clojure.java.jdbc :as sql]
             [compojure.route :as route]
+            [clojure.java.jdbc :as sql]
             [ring.middleware.json :as ring-json]))
 
 ; ------------------- DATABASE CONFIG
