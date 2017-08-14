@@ -11,24 +11,13 @@
 
 (defn get-all-documents []
   (response
-      (jdbc/query database/db-h2-connection
-        ["select * from documents"])))
+      (jdbc/query database/db-h2-connection ["select * from documents"])))
 
-        ; (defn get-all-documents []
-        ;   (response
-        ;     (jdbc/with-connection (db-connection)
-        ;       (jdbc/with-query-results results
-        ;         ["select * from documents"]
-        ;         (into [] results)))))
+(defn get-document [id]
+    (def results (jdbc/query ["select * from documents where id = ?" id]))
+      (cond (empty? results) {:status 404}
+        :else (response (first results))))
 
-; (defn get-document [id]
-;   (jdbc/with-connection (db-connection)
-;     (jdbc/with-query-results results
-;       ["select * from documents where id = ?" id]
-;       (cond
-;         (empty? results) {:status 404}
-;         :else (response (first results))))))
-;
 ; (defn create-new-document [doc]
 ;   (let [id (uuid)]
 ;     (jdbc/with-connection (db-connection)

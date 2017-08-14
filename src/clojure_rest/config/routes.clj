@@ -6,6 +6,8 @@
 (defroutes app-routes
       (context "/documents" [] (defroutes documents-routes)
         (GET  "/" [] (get-all-documents)))
+        (context "/:id" [id] (defroutes document-routes)
+          (GET    "/" [] (get-document id)))
       (route/not-found "Not Found"))
 
       ; (defroutes app-routes
