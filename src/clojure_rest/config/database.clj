@@ -19,13 +19,9 @@
   "Create documents table in the dabatase"
   []
   (log/info "Creating documents table")
-  (jdbc/db-do-commands db-h2-connection
-      [(jdbc/create-table-ddl :documents
-                            [[:id_document :int "PRIMARY KEY"]
-                            [:title "varchar(32)"]
-                            [:text "varchar(64)"]])
-      ]))
-
+  (dbutils/createTable db-h2-connection :documents [[:id_document :int "PRIMARY KEY"]
+                                                    [:title "varchar(32)"]
+                                                    [:text "varchar(64)"]]))
 (defn initializeDatabase
   "Calls methods to intialize database at application startup and shows them at the end"
   []
