@@ -1,6 +1,6 @@
 (ns clojure-rest.config.database
   (:import com.mchange.v2.c3p0.ComboPooledDataSource)
-  (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.java.jdbc :as jdbc]))
 
 (def db
       {:classname "org.h2.Driver"
@@ -9,8 +9,8 @@
        :user "sa"
        :password ""})
 
-(sql/db-do-commands db
-      (sql/create-table-ddl :documents
-                            [:id "integer" "primary key"]
+(jdbc/db-do-commands db
+      (jdbc/create-table-ddl :documents
+                            [[:id "integer" "primary key"]
                             [:title "varchar(1024)"]
-                            [:text :varchar]))
+                            [:text "varchar(2048)"]]))
