@@ -1,16 +1,34 @@
 (ns clojure-rest.config.database
-  (:import com.mchange.v2.c3p0.ComboPooledDataSource)
-  (:require [clojure.java.jdbc :as jdbc]))
+  (:require [clojure.java.jdbc :as jdbc]
+            [clojure.tools.logging :as log]
+            [clojure-rest.utils.database-utils :as dbutils]))
 
-(def db
-      {:classname "org.h2.Driver"
-       :subprotocol "h2"
-       :subname "mem:documents"
+(def db-h2-connection
+      {:dbtype "h2"
+       :dbname "./db/clojure_rest_h2"
        :user "sa"
        :password ""})
 
-(jdbc/db-do-commands db
-      (jdbc/create-table-ddl :documents
-                            [[:id "integer" "primary key"]
-                            [:title "varchar(1024)"]
-                            [:text "varchar(2048)"]]))
+(defn dropAllTables
+  "Drops all tables before recreating them"
+  []
+  (log/info "Dropping all tables")
+  (dbutils/dropTable db-h2-connection "documents"))
+
+(defn createDocumentsTable
+  "Create documents table in the dabatase"
+  []
+  (log/info "Creating documents table")
+  (jdbc/db-do-commands db-h2-connection
+      [(jdbc/create-table-ddl :documents
+                            [[:id_document :int "PRIMARY KEY"]
+                            [:title "varchar(32)"]
+                            [:text "varchar(64)"]])
+      ]))
+
+(defn initializeDatabase
+  "Calls methods to intialize database at application startup and shows them at the end"
+  []
+  (log/info "Initializing whole database")
+  (dropAllTables)
+  (createDocumentsTable))
