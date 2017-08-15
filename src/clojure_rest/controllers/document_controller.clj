@@ -29,13 +29,16 @@
       (jdbc/insert! database/db-h2-connection :documents document))
       (get-document id)))
 
-; (defn create-new-document [doc]
-;   (let [id (uuid)]
-;     (jdbc/with-connection (db-connection)
-;       (let [document (assoc doc "id" id)]
-;         (jdbc/insert-record :documents document)))
-;     (get-document id)))
-;
+(defn update-document [id doc]
+      (let [document (assoc doc "id_document" id)]
+        (jdbc/update! database/db-h2-connection :documents ["id_document=?" id] document))
+    (get-document id))
+
+(defn delete-document [id]
+    (jdbc/delete! database/db-h2-connection :documents ["id_document=?" id])
+  {:status 204})
+
+
 ; (defn update-document [id doc]
 ;     (jdbc/with-connection (db-connection)
 ;       (let [document (assoc doc "id" id)]
