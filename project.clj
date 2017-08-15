@@ -13,7 +13,7 @@
                  [ring/ring-defaults "0.3.1"]] ; ring server default dependencies
   :plugins [[lein-ring "0.12.0"]
             [lein-watch "0.0.3"]]
-  :ring {:handler clojure-rest.handler/app :init clojure-rest.config.database/initializeDatabase}
+  :ring {:handler clojure-rest.handler/app :init clojure-rest.config.init/initApp}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.1"]]}}

@@ -4,10 +4,11 @@
           [compojure.route :as route]))
 
 (defroutes app-routes
-      (context "/documents" [] (defroutes documents-routes)
-        (GET  "/" [] (get-all-documents)))
-        (context "/:id" [id] (defroutes document-routes)
-          (GET    "/" [] (get-document id)))
+      (context "/documents" [] (defroutes documents-routes
+        (GET  "/" [] (get-all-documents))
+        (POST "/" {body :body} (create-new-document body))
+        (context "/:id" [id] (defroutes documents-route
+          (GET    "/" [] (get-document id))))))
       (route/not-found "Not Found"))
 
       ; (defroutes app-routes

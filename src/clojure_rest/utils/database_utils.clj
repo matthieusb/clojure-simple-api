@@ -13,6 +13,6 @@
 (defn createTable
   "Create a table"
   [connection tableName tableRowsSeq]
-  (log/info (str "Creating table :" tableName))
+  (log/info (str "Creating table : " tableName))
   (jdbc/db-do-commands connection
       [(jdbc/create-table-ddl tableName tableRowsSeq)]))
