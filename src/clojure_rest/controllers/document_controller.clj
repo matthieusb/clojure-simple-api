@@ -30,22 +30,12 @@
       (get-document id)))
 
 (defn update-document [id doc]
+  (log/info (str "update-document with id : " id ". New values : " doc))
       (let [document (assoc doc "id_document" id)]
         (jdbc/update! database/db-h2-connection :documents document ["id_document=?" id]))
     (get-document id))
 
 (defn delete-document [id]
+  (log/info (str "delete-document with id : " id))
     (jdbc/delete! database/db-h2-connection :documents ["id_document=?" id])
   {:status 204})
-
-
-; (defn update-document [id doc]
-;     (jdbc/with-connection (db-connection)
-;       (let [document (assoc doc "id" id)]
-;         (jdbc/update-values :documents ["id=?" id] document)))
-;     (get-document id))
-;
-; (defn delete-document [id]
-;   (jdbc/with-connection (db-connection)
-;     (jdbc/delete-rows :documents ["id=?" id]))
-;   {:status 204})
