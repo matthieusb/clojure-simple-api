@@ -31,7 +31,7 @@
 
 (defn update-document [id doc]
       (let [document (assoc doc "id_document" id)]
-        (jdbc/update! database/db-h2-connection :documents ["id_document=?" id] document))
+        (jdbc/update! database/db-h2-connection :documents document ["id_document=?" id]))
     (get-document id))
 
 (defn delete-document [id]
