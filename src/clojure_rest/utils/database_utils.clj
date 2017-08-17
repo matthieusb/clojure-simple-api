@@ -2,6 +2,14 @@
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]))
 
+(declare dropTable)
+
+(defn dropSeveralTables
+  "Drop several tables from a vector"
+  [connection tables]
+  (log/info (str "Beginning drop process on several tables : " tables))
+  (run! (partial dropTable connection) tables))
+
 (defn dropTable
   "Drop a table"
   [connection tableName]

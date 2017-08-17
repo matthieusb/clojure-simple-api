@@ -19,7 +19,13 @@
   "Drops all tables before recreating them"
   []
   (log/info "Dropping all tables")
-  (dbutils/dropTable db-h2-connection "documents"))
+  (dbutils/dropSeveralTables db-h2-connection ["documents" "wrongtable"]))
+
+; (defn dropAllTables
+;   "Drops all tables before recreating them"
+;   []
+;   (log/info "Dropping all tables")
+;   (dbutils/dropTable db-h2-connection "documents"))
 
 (defn createDocumentsTable
   "Create documents table in the dabatase"
