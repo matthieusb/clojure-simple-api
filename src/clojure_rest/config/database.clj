@@ -5,6 +5,7 @@
             [clojure-rest.utils.database-utils :as dbutils]))
 
 (def db-h2-connection
+  appconf/conf
       {:dbtype "h2"
        :dbname "./resources/main/db/clojure_rest_h2"
        :user "sa"
