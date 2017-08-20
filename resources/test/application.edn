@@ -1,0 +1,5 @@
+{:hostname "localhost"
+ :h2database {:dbtype "h2"
+             :dbname "./resources/test/db/clojure_rest_h2"
+             :user "sa"
+             :password ""}}
