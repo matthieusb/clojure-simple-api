@@ -11,7 +11,6 @@
 (defn uuid [] (str (java.util.UUID/randomUUID)))
 
 (defn get-all-documents []
-  (log/warn conf)
   (log/info "get-all-documents")
   (response
       (jdbc/query database/db-h2-connection ["select * from documents"])))

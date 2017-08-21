@@ -13,14 +13,14 @@
                  [ring/ring-defaults "0.3.1"]] ; ring server default dependencies
 
   :plugins [[lein-ring "0.12.0"]
-            [lein-watch "0.0.3"]]
+            [lein-pprint "1.1.2"]]
 
-  :ring {:handler clojure-rest.handler/app :init clojure-rest.config.init/initApp}
-  :profiles {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.1"]]}}
+  :profiles { :test {:resource-paths ["resources/test"]}
+              ; :default {:resource-paths ["resources/main"]}
+              ; :prod {:resource-paths ["resources/main"] }
+              :dev
+                    {:resource-paths ["resources/dev"]
+                     :dependencies [[javax.servlet/servlet-api "2.5"]
+                                    [ring/ring-mock "0.3.1"]]}}
 
-  :watch { ; Watch compile configuration
-           :rate 500 ; check file every 500ms
-           :watchers { :compile { :watch-dirs ["src"]
-                                  :file-patterns [#"\.clj"]
-                                  :tasks ["compile"]}}})
+  :ring { :handler clojure-rest.handler/app :init clojure-rest.config.init/initApp})
