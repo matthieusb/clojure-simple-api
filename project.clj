@@ -13,7 +13,8 @@
                  [ring/ring-defaults "0.3.1"]] ; ring server default dependencies
 
   :plugins [[lein-ring "0.12.0"]
-            [lein-pprint "1.1.2"]]
+            [lein-pprint "1.1.2"]
+            [lein-midje "3.0.0"]]
 
   :profiles { :test {:resource-paths ["resources/test"]}
               ; :default {:resource-paths ["resources/main"]}

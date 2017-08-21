@@ -16,7 +16,6 @@
 (defn dropAllTables
   "Drops all tables before recreating them"
   []
-  (print appconf/conf)
   (log/info "Dropping all tables")
   (dbutils/dropSeveralTables db-h2-connection ["documents" "wrongtable"]))
 
