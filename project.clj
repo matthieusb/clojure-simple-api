@@ -17,8 +17,6 @@
             [lein-midje "3.0.0"]]
 
   :profiles { :test {:resource-paths ["resources/test"]}
-              ; :default {:resource-paths ["resources/main"]}
-              ; :prod {:resource-paths ["resources/main"] }
               :dev
                     {:resource-paths ["resources/dev"]
                      :dependencies [[javax.servlet/servlet-api "2.5"]
