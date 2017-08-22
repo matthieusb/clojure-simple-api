@@ -4,4 +4,4 @@
 
 (defn document
   "Creates a new document record"
-  [{:keys [id_document title text]]})
+  [{:keys [id_document title text]}])
