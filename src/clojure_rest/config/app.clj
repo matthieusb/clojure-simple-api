@@ -1,6 +1,5 @@
 (ns clojure-rest.config.app
   (:require [clojure.java.io :as io]
-            [clojure-rest.utils.config-utils :as confutils]))
+            [nomad :refer [defconfig]]))
 
-(def conf
-  (confutils/load-config (io/resource "application.edn")))
+(defconfig conf (io/resource "application.edn"))

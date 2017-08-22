@@ -9,7 +9,7 @@
 (declare addSomeTestDocuments)
 
 (def db-h2-connection
-  (get appconf/conf :h2database))
+  (get (appconf/conf) :h2database))
 
 (defn initDatabase
   "Calls methods to intialize database at application startup and shows them at the end"
