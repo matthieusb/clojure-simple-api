@@ -11,7 +11,8 @@
                  [com.h2database/h2 "1.4.196"] ; h2 database support
                  [ring/ring-json "0.4.0"] ; ring server json support
                  [ring/ring-defaults "0.3.1"] ; ring server default dependencies
-                 [jarohen/nomad "0.7.3"]] ; configuration handling library
+                 [jarohen/nomad "0.7.3"] ; configuration handling library
+                 [prismatic/schema "1.1.6"]]
 
   :plugins [[lein-ring "0.12.0"]
             [lein-pprint "1.1.2"]]
