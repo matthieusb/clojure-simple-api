@@ -20,6 +20,7 @@
               :dev
                     {:resource-paths ["resources/dev"]
                      :dependencies [[javax.servlet/servlet-api "2.5"]
-                                    [ring/ring-mock "0.3.1"]]}}
+                                    [ring/ring-mock "0.3.1"]
+                                    ]}}
 
   :ring { :handler clojure-rest.handler/app :init clojure-rest.config.init/initApp})
