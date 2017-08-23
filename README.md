@@ -1,5 +1,6 @@
 # clojure-simple-api
 
+[![Build Status](https://travis-ci.org/matthieusb/clojure-simple-api.svg?branch=master)](https://travis-ci.org/matthieusb/clojure-simple-api)
 [![Dependencies Status](https://jarkeeper.com/matthieusb/clojure-simple-api/status.svg)](https://jarkeeper.com/matthieusb/clojure-simple-api)
 
 ## Prerequisites
