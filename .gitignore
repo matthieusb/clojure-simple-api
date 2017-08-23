@@ -1,3 +1,4 @@
+# Lein/maven and clojure files
 /target
 /lib
 /classes
@@ -8,6 +9,12 @@ pom.xml.asc
 *.class
 /.lein-*
 /.nrepl-port
+
+# Idea files
 *.iml
 .idea/
-db/
+
+# Custom generated files
+resources/dev/db/
+resources/test/db/
+test/cov/
