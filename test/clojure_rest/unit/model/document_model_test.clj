@@ -22,6 +22,4 @@
 
     (testing "Testing document validation failed with invalid types in map"
     (let [validationRes (document/validate-document-map wrongDocumentMapInvalidTypes)]
-      (is (= validationRes nil))))
-
-  )
+      (is (= validationRes nil)))))
