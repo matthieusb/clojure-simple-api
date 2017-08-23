@@ -1,5 +1,6 @@
 (ns clojure-rest.model.document
-  (:require [schema.core :as schema]))
+  (:require [clojure.tools.logging :as log]
+            [schema.core :as schema]))
 
 (def Document-schema
   {:id_document schema/Str
@@ -16,4 +17,5 @@
 (defn validate-document-map
   "Creates a new document from a map, with validation"
   [mapInput]
-  (schema/validate Document-schema mapInput))
+  (try (schema/validate Document-schema mapInput)
+    (catch Exception e (log/error (str "Validation exception occured : " (.getMessage e))))))
