@@ -18,6 +18,11 @@ To launch tests for this application, run :
 lein test
 ```
 
+To test coverage, the project uses the [Cloverage plugin](https://github.com/cloverage/cloverage), just launch :
+```
+lein cloverage
+```
+
 ## Running
 
 To start a web server for the application, run:
@@ -28,11 +33,6 @@ lein ring server
 
 The application resorts to an h2 database for both testing and running, since it is just a demonstration.
 You don't need to start a database or anything, everything is stored temporarily in the *resources*/**env**/*db* folder.
-
-To test coverage, the project uses the [Cloverage plugin](https://github.com/cloverage/cloverage), just launch :
-```
-lein cloverage
-```
 
 ## License
 
