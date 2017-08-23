@@ -1,31 +1,30 @@
-(ns clojure-rest.services.document-service
+(ns clojure-rest.dao.document-dao
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]
             [clojure-rest.model.document :as document]
-            [clojure-rest.config.database :as database]
-            [clojure-rest.dao.document-dao :as documentDao]))
+            [clojure-rest.config.database :as database]))
 
 (defn getAllDocuments
   "Gets all documents from the database"
   []
-  (documentDao/getAllDocuments))
+  (jdbc/query database/db-h2-connection ["select * from documents"]))
 
 (defn getDocumentBydId
   "Gets only one document using its id"
   [idDocument]
-  (documentDao/getDocumentBydId idDocument))
+  (jdbc/query database/db-h2-connection ["select * from documents where id_document = ?" idDocument] {}))
 
 (defn createNewDocument
   "Adds a new document to the database"
   [documentToCreate]
-  (documentDao/createNewDocument documentToCreate))
+  (jdbc/insert! database/db-h2-connection :documents documentToCreate))
 
 (defn updateDocument
   "Updates an existing document on the database"
   [idDocumentToUpdate documentToUpdate]
-  (documentDao/updateDocument idDocumentToUpdate documentToUpdate))
+  (jdbc/update! database/db-h2-connection :documents documentToUpdate ["id_document=?" idDocumentToUpdate]))
 
 (defn deleteDocument
   "Deletes an existing document on the database, returns number of deleted rows"
   [idDocumentToDelete]
-  (documentDao/deleteDocument idDocumentToDelete))
+  (jdbc/delete! database/db-h2-connection :documents ["id_document=?" idDocumentToDelete]))
