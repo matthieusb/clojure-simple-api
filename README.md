@@ -1,6 +1,7 @@
 # clojure-simple-api
 
 [![Build Status](https://travis-ci.org/matthieusb/clojure-simple-api.svg?branch=master)](https://travis-ci.org/matthieusb/clojure-simple-api)
+[![Coverage Status](https://coveralls.io/repos/github/matthieusb/clojure-simple-api/badge.svg?branch=master)](https://coveralls.io/github/matthieusb/clojure-simple-api?branch=master)
 [![Dependencies Status](https://jarkeeper.com/matthieusb/clojure-simple-api/status.svg)](https://jarkeeper.com/matthieusb/clojure-simple-api)
 
 This application is a simple demonstration api used for an ippon-article about Clojure.
@@ -27,6 +28,11 @@ lein ring server
 
 The application resorts to an h2 database for both testing and running, since it is just a demonstration.
 You don't need to start a database or anything, everything is stored temporarily in the *resources*/**env**/*db* folder.
+
+To test coverage, the project uses the [Cloverage plugin](https://github.com/cloverage/cloverage), just launch :
+```
+lein cloverage
+```
 
 ## License
 

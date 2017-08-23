@@ -12,10 +12,12 @@
                  [ring/ring-json "0.4.0"] ; ring server json support
                  [ring/ring-defaults "0.3.1"] ; ring server default dependencies
                  [jarohen/nomad "0.7.3"] ; configuration handling library
-                 [prismatic/schema "1.1.6"]]
+                 [prismatic/schema "1.1.6"] ; bean validation equivalent for clojure
+                 ]
 
   :plugins [[lein-ring "0.12.0"]
-            [lein-pprint "1.1.2"]]
+            [lein-pprint "1.1.2"]
+            [lein-cloverage "1.0.9"]]
 
   :profiles { :test {:resource-paths ["resources/test"]}
               :dev
