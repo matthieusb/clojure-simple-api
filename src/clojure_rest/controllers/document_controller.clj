@@ -6,6 +6,7 @@
             [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]
             [ring.middleware.json :as ring-json]
+            [clojure-rest.model.document :as document]
             [clojure-rest.config.database :as database]))
 
 (defn uuid [] (str (java.util.UUID/randomUUID)))
@@ -23,19 +24,24 @@
 
 (defn create-new-document [doc]
   (log/info (str "create-new-document : " doc))
-  (let [id (uuid)]
-    (log/info (str "create-new-document generated id : " id))
-    (let [document (assoc doc "id_document" id)]
-      (jdbc/insert! database/db-h2-connection :documents document))
-      (get-document id)))
+  (let [validDocument (document/validate-document-map doc)]
+    (if (nil? validDocument) {:status 400}
+    (let [id (uuid)]
+      (log/info (str "create-new-document generated id : " id))
+      (let [document (assoc doc :id_document id)]
+        (jdbc/insert! database/db-h2-connection :documents document))
+        (get-document id)))))
 
 (defn update-document [id doc]
   (log/info (str "update-document with id : " id ". New values : " doc))
-      (let [document (assoc doc "id_document" id)]
-        (jdbc/update! database/db-h2-connection :documents document ["id_document=?" id]))
-    (get-document id))
+  (let [validDocument (document/validate-document-map doc)]
+    (if (nil? validDocument) {:status 400}
+      (let [document (assoc doc :id_document id)]
+        (jdbc/update! database/db-h2-connection :documents document ["id_document=?" id])
+    (get-document id)))))
 
 (defn delete-document [id]
   (log/info (str "delete-document with id : " id))
-    (jdbc/delete! database/db-h2-connection :documents ["id_document=?" id])
-  {:status 204})
+  (let [numberOfRowsDeletedArray (jdbc/delete! database/db-h2-connection :documents ["id_document=?" id])]
+    (println (str "number of rows deleted : " numberOfRowsDeletedArray))
+    (if (> (first numberOfRowsDeletedArray) 0) {:status 204} {:status 404})))

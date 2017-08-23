@@ -55,7 +55,14 @@
     (let [request (mock/request :put "/documents/notfound" (json/generate-string {:id_document "noid" :title "wontwork" :text "causeIncorrectid"}))]
       (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 404)))))
-  ) ; TODO Add tests on body returned and database
+  ; TODO Add tests on body returned and database
+
+  (testing "Testing document update route failed with incorrect document format"
+    (let [request (mock/request :put "/documents/invalidformat" (json/generate-string {:id_document "incorrectformat" :title "wontwork"}))]
+      (let [response (app (mock/content-type request "application/json"))]
+      (is (= (:status response) 400)))))
+  ; TODO Add tests on body returned and database
+  )
 
 (deftest test-document-controller-delete
   (database/initDatabase)

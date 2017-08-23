@@ -13,5 +13,5 @@
 
 (def app
   (-> (handler/api app-routes)
-      (ring-json/wrap-json-body)
+      (ring-json/wrap-json-body  {:keywords? true :bigdecimals? true})
       (ring-json/wrap-json-response)))
