@@ -29,11 +29,9 @@
 
 (defn update-document [id doc]
   (log/info (str "update-document with id : " id ". New values : " doc))
-  (let [validDocument (document/validate-document-map doc)]
-    (if (nil? validDocument) {:status 400}
-      (let [document (assoc doc :id_document id)]
-        (documentService/updateDocument id document)
-    (get-document id)))))
+  (let [idDocumentUpdated (documentService/updateDocument id doc)]
+    (if (nil? idDocumentUpdated) {:status 400}
+      (get-document idDocumentUpdated))))
 
 (defn delete-document [id]
   (log/info (str "delete-document with id : " id))

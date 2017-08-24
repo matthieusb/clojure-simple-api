@@ -31,7 +31,11 @@
 (defn updateDocument
   "Updates an existing document on the database"
   [idDocumentToUpdate documentToUpdate]
-  (documentDao/updateDocument idDocumentToUpdate documentToUpdate))
+  (let [validDocument (document/validate-document-map documentToUpdate)]
+    (if (nil? validDocument) nil
+      (let [document (assoc documentToUpdate :id_document idDocumentToUpdate)]
+        (documentDao/updateDocument idDocumentToUpdate documentToUpdate)
+        idDocumentToUpdate))))
 
 (defn deleteDocument
   "Deletes an existing document on the database, returns number of deleted rows"
