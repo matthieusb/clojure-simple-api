@@ -8,6 +8,8 @@
 
 (def expectedHeaders {"Content-Type" "application/json; charset=utf-8"})
 (def initialDocumentList (json/generate-string [{:id_document "1" :title "titre1" :text "text1"} {:id_document "2" :title "titre2" :text "text2"}]))
+(def documentToCreate {:id_document "dummy" :title "newDocumentTitle" :text "newDocumentText"})
+(def documentToUpdate {:id_document "1" :title "titre1Updated" :text "texte1Updated"})
 
 (deftest test-document-controller-list
   (database/initDatabase)
@@ -32,47 +34,46 @@
   (database/initDatabase)
 
   (testing "Testing document creation route worked"
-    (let [request (mock/request :post "/documents" (json/generate-string {:id_document "dummy" :title "newDocumentTitle" :text "newDocumentText"}))]
+    (let [request (mock/request :post "/documents" (json/generate-string documentToCreate))]
     (let [response (app (mock/content-type request "application/json"))]
-      (is (= (:status response) 200)))))
-  ; TODO Add body test and count test
+      (is (= (:status response) 200))
+      (is (= (get (json/parse-string (:body response)) "title") (:title documentToCreate)))
+      (is (= (get (json/parse-string (:body response)) "text") (:text documentToCreate)))
+      (is (= (count (jdbc/query database/db-h2-connection ["select * from documents"])) 3)))))
 
   (testing "Testing document creation route failed because of incorrect document"
     (let [request (mock/request :post "/documents" (json/generate-string {:id_document "dummy" :title "newDocumentTitle" :text "newDocumentText" :wrongattribute "badvalue"}))]
     (let [response (app (mock/content-type request "application/json"))]
-      (is (= (:status response) 400)))))) ; FIXME This test causes an error
+      (is (= (:status response) 400))))))
 
 (deftest test-document-controller-update
   (database/initDatabase)
 
   (testing "Testing document update route worked"
-    (let [request (mock/request :put "/documents/1" (json/generate-string {:id_document "1" :title "titre1Updated" :text "texte1Updated"}))]
+    (let [request (mock/request :put "/documents/1" (json/generate-string documentToUpdate))]
       (let [response (app (mock/content-type request "application/json"))]
-      (is (= (:status response) 200)))))
-  ; TODO Add tests on body returned and database
+      (is (= (:status response) 200))
+      (is (= (get (json/parse-string (:body response)) "title") (:title documentToUpdate)))
+      (is (= (get (json/parse-string (:body response)) "text") (:text documentToUpdate))))))
 
   (testing "Testing document update route failed with incorrect id"
     (let [request (mock/request :put "/documents/notfound" (json/generate-string {:id_document "noid" :title "wontwork" :text "causeIncorrectid"}))]
       (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 404)))))
-  ; TODO Add tests on body returned and database
 
   (testing "Testing document update route failed with incorrect document format"
     (let [request (mock/request :put "/documents/invalidformat" (json/generate-string {:id_document "incorrectformat" :title "wontwork"}))]
       (let [response (app (mock/content-type request "application/json"))]
-      (is (= (:status response) 400)))))
-  ; TODO Add tests on body returned and database
-  )
+      (is (= (:status response) 400))))))
 
 (deftest test-document-controller-delete
   (database/initDatabase)
-
   (testing "Testing document delete route worked"
     (let [response (app (mock/request :delete "/documents/1"))]
-      (is (= (:status response) 204))))
-  ; TODO Add tests on database
+      (is (= (:status response) 204))
+      (is (= (count (jdbc/query database/db-h2-connection ["select * from documents"])) 1))))
 
+  (database/initDatabase)
   (testing "Testing document delete route failed"
     (let [response (app (mock/request :delete "/documents/notfound"))]
-      (is (= (:status response) 404))))) ; FIXME This test fails
-; TODO Add tests on database and correct error
+      (is (= (:status response) 404)))))
