@@ -10,8 +10,6 @@
             [clojure-rest.model.document :as document]
             [clojure-rest.config.database :as database]))
 
-(defn uuid [] (str (java.util.UUID/randomUUID)))
-
 (defn get-all-documents []
   (log/info "get-all-documents")
   (response
@@ -25,13 +23,9 @@
 
 (defn create-new-document [doc]
   (log/info (str "create-new-document : " doc))
-  (let [validDocument (document/validate-document-map doc)]
-    (if (nil? validDocument) {:status 400}
-    (let [id (uuid)]
-      (log/info (str "create-new-document generated id : " id))
-      (let [document (assoc doc :id_document id)]
-        (documentService/createNewDocument document))
-        (get-document id)))))
+  (let [idDocumentCreated (documentService/createNewDocument doc)]
+    (if (nil? idDocumentCreated) {:status 400}
+      (get-document idDocumentCreated))))
 
 (defn update-document [id doc]
   (log/info (str "update-document with id : " id ". New values : " doc))
@@ -44,5 +38,5 @@
 (defn delete-document [id]
   (log/info (str "delete-document with id : " id))
   (let [numberOfRowsDeletedArray (documentService/deleteDocument id)]
-    (println (str "number of rows deleted : " numberOfRowsDeletedArray))
+    (log/info (str "number of rows deleted : " numberOfRowsDeletedArray))
     (if (> (first numberOfRowsDeletedArray) 0) {:status 204} {:status 404})))

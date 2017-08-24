@@ -5,6 +5,8 @@
             [clojure-rest.config.database :as database]
             [clojure-rest.dao.document-dao :as documentDao]))
 
+(defn uuid [] (str (java.util.UUID/randomUUID)))
+
 (defn getAllDocuments
   "Gets all documents from the database"
   []
@@ -16,9 +18,15 @@
   (documentDao/getDocumentBydId idDocument))
 
 (defn createNewDocument
-  "Adds a new document to the database"
+  "Adds a new document to the database, returns the id if ok, null if invalid"
   [documentToCreate]
-  (documentDao/createNewDocument documentToCreate))
+  (let [validDocument (document/validate-document-map documentToCreate)]
+    (if (nil? validDocument) nil
+    (let [id (uuid)]
+      (log/info (str "create-new-document generated id : " id))
+      (let [document (assoc documentToCreate :id_document id)]
+        (documentDao/createNewDocument document)
+        id)))))
 
 (defn updateDocument
   "Updates an existing document on the database"
