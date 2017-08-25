@@ -2,15 +2,15 @@
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]))
 
-(declare dropTable)
+(declare drop-table)
 
-(defn dropSeveralTables
+(defn drop-several-tables
   "Drop several tables from a vector"
   [connection tables]
   (log/info (str "Beginning drop process on several tables : " tables))
-  (run! (partial dropTable connection) tables))
+  (run! (partial drop-table connection) tables))
 
-(defn dropTable
+(defn drop-table
   "Drop a table"
   [connection tableName]
   (log/info (str "Dropping table : " tableName))
@@ -18,7 +18,7 @@
                        [(jdbc/drop-table-ddl tableName)])
     (catch Exception e (log/warn (str "Caught exception : " (.getMessage e))))))
 
-(defn createTable
+(defn create-table
   "Create a table"
   [connection tableName tableRowsSeq]
   (log/info (str "Creating table : " tableName))

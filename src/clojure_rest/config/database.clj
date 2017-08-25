@@ -23,13 +23,13 @@
   "Drops all tables before recreating them"
   []
   (log/info "Dropping all tables")
-  (dbutils/dropSeveralTables db-h2-connection ["documents" "wrongtable"]))
+  (dbutils/drop-several-tables db-h2-connection ["documents" "wrongtable"]))
 
 (defn create-documents-table
   "Create documents table in the dabatase"
   []
   (log/info "Creating documents table")
-  (dbutils/createTable db-h2-connection :documents [[:id_document "varchar(36)" "PRIMARY KEY"]
+  (dbutils/create-table db-h2-connection :documents [[:id_document "varchar(36)" "PRIMARY KEY"]
                                                     [:title "varchar(32)"]
                                                     [:text "varchar(64)"]]))
 (defn add-some-test-documents
