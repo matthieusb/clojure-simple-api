@@ -26,4 +26,4 @@
                                     [ring/ring-mock "0.3.1"]
                                     ]}}
 
-  :ring { :handler clojure-rest.handler/app :init clojure-rest.config.init/initApp})
+  :ring { :handler clojure-rest.handler/app :init clojure-rest.config.init/init-app})

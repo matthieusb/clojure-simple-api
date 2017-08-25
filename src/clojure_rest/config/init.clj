@@ -4,7 +4,7 @@
             [clojure-rest.config.database :as database]
             [clojure-rest.utils.database-utils :as dbutils]))
 
-(defn initApp
+(defn init-app
   "Launches several initialization operations"
   []
-  (database/initDatabase))
+  (database/init-database))

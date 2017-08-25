@@ -12,7 +12,7 @@
 (def documentToUpdate {:id_document "1" :title "titre1Updated" :text "texte1Updated"})
 
 (deftest test-document-controller-list
-  (database/initDatabase)
+  (database/init-database)
 
   (testing "Testing document list route worked"
     (let [response (app (mock/request :get "/documents"))]
@@ -21,7 +21,7 @@
       (is (= (:body response) initialDocumentList)))))
 
 (deftest test-document-controller-getbyid
-  (database/initDatabase)
+  (database/init-database)
   (testing "Testing get document by id route worked"
     (let [response (app (mock/request :get "/documents/1"))]
       (is (= (:status response) 200))))
@@ -31,7 +31,7 @@
       (is (= (:status response) 404)))))
 
 (deftest test-document-controller-create
-  (database/initDatabase)
+  (database/init-database)
 
   (testing "Testing document creation route worked"
     (let [request (mock/request :post "/documents" (json/generate-string documentToCreate))]
@@ -47,7 +47,7 @@
       (is (= (:status response) 400))))))
 
 (deftest test-document-controller-update
-  (database/initDatabase)
+  (database/init-database)
 
   (testing "Testing document update route worked"
     (let [request (mock/request :put "/documents/1" (json/generate-string documentToUpdate))]
@@ -67,13 +67,13 @@
       (is (= (:status response) 400))))))
 
 (deftest test-document-controller-delete
-  (database/initDatabase)
+  (database/init-database)
   (testing "Testing document delete route worked"
     (let [response (app (mock/request :delete "/documents/1"))]
       (is (= (:status response) 204))
       (is (= (count (jdbc/query database/db-h2-connection ["select * from documents"])) 1))))
 
-  (database/initDatabase)
+  (database/init-database)
   (testing "Testing document delete route failed"
     (let [response (app (mock/request :delete "/documents/notfound"))]
       (is (= (:status response) 404)))))
