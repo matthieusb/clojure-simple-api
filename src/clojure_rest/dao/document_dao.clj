@@ -21,8 +21,8 @@
 
 (defn update-document
   "Updates an existing document on the database"
-  [id-document-to-update documentToUpdate]
-  (jdbc/update! database/db-h2-connection :documents documentToUpdate ["id_document=?" id-document-to-update]))
+  [id-document-to-update document-to-update]
+  (jdbc/update! database/db-h2-connection :documents document-to-update ["id_document=?" id-document-to-update]))
 
 (defn delete-document
   "Deletes an existing document on the database, returns number of deleted rows"
