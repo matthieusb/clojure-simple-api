@@ -11,20 +11,20 @@
 
 (defn get-document-by-id
   "Gets only one document using its id"
-  [idDocument]
-  (jdbc/query database/db-h2-connection ["select * from documents where id_document = ?" idDocument] {}))
+  [id-document]
+  (jdbc/query database/db-h2-connection ["select * from documents where id_document = ?" id-document] {}))
 
 (defn create-new-document
   "Adds a new document to the database"
-  [documentToCreate]
-  (jdbc/insert! database/db-h2-connection :documents documentToCreate))
+  [document-to-create]
+  (jdbc/insert! database/db-h2-connection :documents document-to-create))
 
 (defn update-document
   "Updates an existing document on the database"
-  [idDocumentToUpdate documentToUpdate]
-  (jdbc/update! database/db-h2-connection :documents documentToUpdate ["id_document=?" idDocumentToUpdate]))
+  [id-document-to-update documentToUpdate]
+  (jdbc/update! database/db-h2-connection :documents documentToUpdate ["id_document=?" id-document-to-update]))
 
 (defn delete-document
   "Deletes an existing document on the database, returns number of deleted rows"
-  [idDocumentToDelete]
-  (jdbc/delete! database/db-h2-connection :documents ["id_document=?" idDocumentToDelete]))
+  [id-document-to-delete]
+  (jdbc/delete! database/db-h2-connection :documents ["id_document=?" id-document-to-delete]))

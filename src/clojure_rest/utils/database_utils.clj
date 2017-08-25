@@ -12,15 +12,15 @@
 
 (defn drop-table
   "Drop a table"
-  [connection tableName]
-  (log/info (str "Dropping table : " tableName))
+  [connection table-name]
+  (log/info (str "Dropping table : " table-name))
   (try (jdbc/db-do-commands connection
-                       [(jdbc/drop-table-ddl tableName)])
+                       [(jdbc/drop-table-ddl table-name)])
     (catch Exception e (log/warn (str "Caught exception : " (.getMessage e))))))
 
 (defn create-table
   "Create a table"
-  [connection tableName tableRowsSeq]
-  (log/info (str "Creating table : " tableName))
+  [connection table-name table-rows-seq]
+  (log/info (str "Creating table : " table-name))
   (jdbc/db-do-commands connection
-      [(jdbc/create-table-ddl tableName tableRowsSeq)]))
+      [(jdbc/create-table-ddl table-name table-rows-seq)]))
