@@ -10,6 +10,6 @@
 ; ------------------- APP CONFIG
 
 (def app
-  (-> (handler/api config-routes/app-routes)
+  (-> config-routes/app-routes
       (ring-json/wrap-json-body  {:keywords? true :bigdecimals? true})
       (ring-json/wrap-json-response)))
