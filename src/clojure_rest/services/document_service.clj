@@ -7,17 +7,17 @@
 
 (defn uuid [] (str (java.util.UUID/randomUUID)))
 
-(defn getAllDocuments
+(defn get-all-documents
   "Gets all documents from the database"
   []
-  (documentDao/getAllDocuments))
+  (documentDao/get-all-documents))
 
-(defn getDocumentBydId
+(defn get-document-by-id
   "Gets only one document using its id"
   [idDocument]
-  (documentDao/getDocumentBydId idDocument))
+  (documentDao/get-document-by-id idDocument))
 
-(defn createNewDocument
+(defn create-new-document
   "Adds a new document to the database, returns the id if ok, null if invalid"
   [documentToCreate]
   (let [validDocument (document/validate-document-map documentToCreate)]
@@ -25,19 +25,19 @@
     (let [id (uuid)]
       (log/info (str "create-new-document generated id : " id))
       (let [document (assoc documentToCreate :id_document id)]
-        (documentDao/createNewDocument document)
+        (documentDao/create-new-document document)
         id)))))
 
-(defn updateDocument
+(defn update-document
   "Updates an existing document on the database"
   [idDocumentToUpdate documentToUpdate]
   (let [validDocument (document/validate-document-map documentToUpdate)]
     (if (nil? validDocument) nil
       (let [document (assoc documentToUpdate :id_document idDocumentToUpdate)]
-        (documentDao/updateDocument idDocumentToUpdate documentToUpdate)
+        (documentDao/update-document idDocumentToUpdate documentToUpdate)
         idDocumentToUpdate))))
 
-(defn deleteDocument
+(defn delete-document
   "Deletes an existing document on the database, returns number of deleted rows"
   [idDocumentToDelete]
-  (documentDao/deleteDocument idDocumentToDelete))
+  (documentDao/delete-document idDocumentToDelete))

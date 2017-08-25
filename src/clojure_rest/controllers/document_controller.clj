@@ -13,28 +13,28 @@
 (defn get-all-documents []
   (log/info "get-all-documents")
   (response
-      (documentService/getAllDocuments)))
+      (documentService/get-all-documents)))
 
 (defn get-document [id]
   (log/info (str "get-document with id : " id))
-  (def results (documentService/getDocumentBydId id))
+  (def results (documentService/get-document-by-id id))
     (cond (empty? results) {:status 404}
       :else (response (first results))))
 
 (defn create-new-document [doc]
   (log/info (str "create-new-document : " doc))
-  (let [idDocumentCreated (documentService/createNewDocument doc)]
+  (let [idDocumentCreated (documentService/create-new-document doc)]
     (if (nil? idDocumentCreated) {:status 400}
       (get-document idDocumentCreated))))
 
 (defn update-document [id doc]
   (log/info (str "update-document with id : " id ". New values : " doc))
-  (let [idDocumentUpdated (documentService/updateDocument id doc)]
+  (let [idDocumentUpdated (documentService/update-document id doc)]
     (if (nil? idDocumentUpdated) {:status 400}
       (get-document idDocumentUpdated))))
 
 (defn delete-document [id]
   (log/info (str "delete-document with id : " id))
-  (let [numberOfRowsDeletedArray (documentService/deleteDocument id)]
+  (let [numberOfRowsDeletedArray (documentService/delete-document id)]
     (log/info (str "number of rows deleted : " numberOfRowsDeletedArray))
     (if (> (first numberOfRowsDeletedArray) 0) {:status 204} {:status 404})))
