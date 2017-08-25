@@ -23,6 +23,11 @@ To test coverage, the project uses the [Cloverage plugin](https://github.com/clo
 lein cloverage
 ```
 
+If you want to launch the linter, use the following command :
+```
+lein eastwood
+```
+
 ## Running
 
 To start a web server for the application, run:
