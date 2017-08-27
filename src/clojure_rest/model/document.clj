@@ -4,10 +4,10 @@
             [schema.core :as schema]))
 
 ; -- Korma configuration
-(defentity document
-  (table :documents)
-  (pk :id_document)
-  (entity-fields :title :text))
+(defentity documents
+  (table :documents) ; Associated table
+  (pk :id_document) ; primary key
+  (entity-fields :id_document :title :text)) ; Default field for select
 
 ; -- Validation schema
 (def document-schema

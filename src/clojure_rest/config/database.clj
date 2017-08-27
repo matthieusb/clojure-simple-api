@@ -2,7 +2,6 @@
   (:use [korma.db :only [defdb h2]])
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]
-            [korma.db :as korma-db]
             [clojure-rest.config.app :as appconf]
             [clojure-rest.utils.database-utils :as dbutils]))
 
@@ -10,13 +9,9 @@
 (declare create-documents-table)
 (declare add-some-test-documents)
 
-; -- Korma connection configuration
 (defdb db-h2-korma (h2 (get (appconf/conf) :h2databasekorma)))
+(def db-h2-connection (get (appconf/conf) :h2database))
 
-; -- Jdbc connection configuration
-
-(def db-h2-connection
-  (get (appconf/conf) :h2database))
 
 (defn init-database
   "Calls methods to intialize database at application startup and shows them at the end"

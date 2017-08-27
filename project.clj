@@ -14,6 +14,7 @@
                  [jarohen/nomad "0.7.3"] ; configuration handling library
                  [prismatic/schema "1.1.6"] ; bean validation equivalent for clojure
                  [korma "0.4.3"] ; orm dependency
+                 [ragtime "0.6.0"] ; migration utility
                  ]
 
   :plugins [[lein-ring "0.12.0"]
