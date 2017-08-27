@@ -30,6 +30,12 @@ lein eastwood
 
 ## Running
 
+Before running the server for the first time, don't forget to run the following command :
+
+```
+lein migrate
+```
+
 To start a web server for the application, run:
 
 ```
