@@ -13,6 +13,7 @@
                  [ring/ring-defaults "0.3.1"] ; ring server default dependencies
                  [jarohen/nomad "0.7.3"] ; configuration handling library
                  [prismatic/schema "1.1.6"] ; bean validation equivalent for clojure
+                 [korma "0.4.3"] ; orm dependency
                  ]
 
   :plugins [[lein-ring "0.12.0"]

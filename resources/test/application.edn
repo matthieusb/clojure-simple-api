@@ -2,4 +2,8 @@
  :h2database {:dbtype "h2"
              :dbname "./resources/test/db/clojure_rest_h2"
              :user "sa"
-             :password ""}}
+             :password ""}
+ :h2databasekorma {:db "./resources/test/db/clojure_rest_h2_korma"
+                   :user "sa"
+                   :password ""}
+ }

@@ -1,12 +1,19 @@
 (ns clojure-rest.config.database
+  (:use [korma.db :only [defdb h2]])
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]
+            [korma.db :as korma-db]
             [clojure-rest.config.app :as appconf]
             [clojure-rest.utils.database-utils :as dbutils]))
 
 (declare drop-all-tables)
 (declare create-documents-table)
 (declare add-some-test-documents)
+
+; -- Korma connection configuration
+(defdb db-h2-korma (h2 (get (appconf/conf) :h2databasekorma)))
+
+; -- Jdbc connection configuration
 
 (def db-h2-connection
   (get (appconf/conf) :h2database))

@@ -1,19 +1,19 @@
 (ns clojure-rest.model.document
+  (:use [korma.core :only [defentity table entity-fields pk]])
   (:require [clojure.tools.logging :as log]
             [schema.core :as schema]))
 
+; -- Korma configuration
+(defentity document
+  (table :documents)
+  (pk :id_document)
+  (entity-fields :title :text))
+
+; -- Validation schema
 (def document-schema
   {:id_document schema/Str
    :title schema/Str
    :text schema/Str})
-
-; Not needed for now
-; (defrecord Document [id_document title text])
-;
-; (defn document
-;   "Creates a new document"
-;   [{:keys [id_document title text]}]
-;   (-> Document id_document title text))
 
 (defn validate-document-map
   "Creates a new document from a map, with validation"
