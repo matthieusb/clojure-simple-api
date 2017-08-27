@@ -7,4 +7,4 @@
 (defn init-app
   "Launches several initialization operations"
   []
-  (database/init-database))
+  (database/reinit-database))
