@@ -29,7 +29,7 @@
                                     [ring/ring-mock "0.3.1"]
                                     ]}}
 
-  :ring { :handler clojure-rest.handler/app :init clojure-rest.config.init/init-app}
+  :ring { :handler clojure-rest.handler/app}
 
   :aliases {"migrate"  ["run" "-m" "clojure-rest.config.database/ragtime-migrate"]
             "rollback" ["run" "-m" "clojure-rest.config.database/ragtime-rollback"]})

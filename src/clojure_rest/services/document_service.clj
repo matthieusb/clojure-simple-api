@@ -23,7 +23,6 @@
   (let [valid-document (document/validate-document-map document-to-create)]
     (if (nil? valid-document) nil
     (let [id (uuid)]
-      (log/info (str "create-new-document generated id : " id))
       (let [document (assoc document-to-create :id_document id)]
         (document-dao/create-new-document document)
         id)))))
@@ -38,6 +37,6 @@
         id-document-to-update))))
 
 (defn delete-document
-  "Deletes an existing document on the database, returns number of deleted rows"
+  "Deletes an existing document on the database, returns id of deleted document"
   [id-document-to-delete]
   (document-dao/delete-document id-document-to-delete))

@@ -2,10 +2,10 @@
   (:require [clojure.test :refer :all]
             [clojure-rest.model.document :as document]))
 
-(def valid-document-map {:id_document "1" :title "title1" :text "text1"})
+(def valid-document-map {:id_document "1" :title "title1" :description "text1"})
 (def wrong-document-map-not-enough-keywords {:id_document "1" :title "title1"})
-(def wrong-document-map-too-many-keywords {:id_document "1" :title "title1" :text "text1" :oneMoreKeyword "wrong"})
-(def wrong-document-map-invalid-types {:id_document "1" :title 100 :text 1})
+(def wrong-document-map-too-many-keywords {:id_document "1" :title "title1" :description "text1" :oneMoreKeyword "wrong"})
+(def wrong-document-map-invalid-types {:id_document "1" :title 100 :description 1})
 
 (deftest test-document-validation
   (testing "Testing document validation worked"

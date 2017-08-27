@@ -34,6 +34,6 @@
 
 (defn delete-document [id]
   (log/info (str "delete-document with id : " id))
-  (let [number-of-rows-deleted-array (document-service/delete-document id)]
-    (log/info (str "number of rows deleted : " number-of-rows-deleted-array))
-    (if (> (first number-of-rows-deleted-array) 0) {:status 204} {:status 404})))
+  (let [deleted-document-id (document-service/delete-document id)]
+    (log/info (str "id of document deleted : " deleted-document-id))
+    (if (= deleted-document-id 0) {:status 404} {:status 204})))

@@ -29,8 +29,8 @@
   (log/info "Rollbacking ragtime migrations")
   (ragtime-repl/rollback (load-ragtime-config)))
 
-(defn init-database
-  "Calls methods to intialize database at application startup and shows them at the end"
+(defn reinit-database
+  "Clears database and recreates it using ragtime"
   []
-  (log/info "Initializing whole database")
+  (ragtime-rollback)
   (ragtime-migrate))
