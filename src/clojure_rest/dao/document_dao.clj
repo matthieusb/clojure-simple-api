@@ -1,5 +1,5 @@
 (ns clojure-rest.dao.document-dao
-  (:use [korma.core :only [select insert update values delete where set-fields]])
+  (:use [korma.core :only [select insert values delete where set-fields]])
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]
             [clojure-rest.model.document :as document-model]
@@ -29,7 +29,7 @@
 (defn update-document
   "Updates an existing document on the database"
   [id-document-to-update document-to-update]
-  (update document-model/document
+  (korma.core/update document-model/document
           (set-fields document-to-update)
           (where {:id_document id-document-to-update})))
 
