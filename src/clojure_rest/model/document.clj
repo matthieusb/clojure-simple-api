@@ -4,16 +4,16 @@
             [schema.core :as schema]))
 
 ; -- Korma configuration
-(defentity documents
-  (table :documents) ; Associated table
+(defentity document
+  (table :document) ; Associated table
   (pk :id_document) ; primary key
-  (entity-fields :id_document :title :text)) ; Default field for select
+  (entity-fields :id_document :title :description)) ; Default field for select
 
 ; -- Validation schema
 (def document-schema
   {:id_document schema/Str
    :title schema/Str
-   :text schema/Str})
+   :description schema/Str})
 
 (defn validate-document-map
   "Creates a new document from a map, with validation"

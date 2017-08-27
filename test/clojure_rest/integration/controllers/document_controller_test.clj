@@ -7,9 +7,9 @@
             [clojure-rest.config.database :as database]))
 
 (def expected-headers {"Content-Type" "application/json; charset=utf-8"})
-(def initial-document-list-expected (json/generate-string [{:id_document "1" :title "titre1" :text "text1"} {:id_document "2" :title "titre2" :text "text2"}]))
-(def document-to-create {:id_document "dummy" :title "newDocumentTitle" :text "newDocumentText"})
-(def document-to-update {:id_document "1" :title "titre1Updated" :text "texte1Updated"})
+(def initial-document-list-expected (json/generate-string [{:id_document "1" :title "title1" :description "text1"} {:id_document "2" :title "title2" :description "text2"}]))
+(def document-to-create {:id_document "dummy" :title "newDocumentTitle" :description "newDocumentText"})
+(def document-to-update {:id_document "1" :title "titre1Updated" :description "texte1Updated"})
 
 (deftest test-document-controller-list
   (database/init-database)
@@ -38,11 +38,11 @@
     (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 200))
       (is (= (get (json/parse-string (:body response)) "title") (:title document-to-create)))
-      (is (= (get (json/parse-string (:body response)) "text") (:text document-to-create)))
+      (is (= (get (json/parse-string (:body response)) "text") (:description document-to-create)))
       (is (= (count (jdbc/query database/db-h2-connection ["select * from documents"])) 3)))))
 
   (testing "Testing document creation route failed because of incorrect document"
-    (let [request (mock/request :post "/documents" (json/generate-string {:id_document "dummy" :title "newDocumentTitle" :text "newDocumentText" :wrongattribute "badvalue"}))]
+    (let [request (mock/request :post "/documents" (json/generate-string {:id_document "dummy" :title "newDocumentTitle" :description "newDocumentText" :wrongattribute "badvalue"}))]
     (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 400))))))
 
@@ -54,10 +54,10 @@
       (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 200))
       (is (= (get (json/parse-string (:body response)) "title") (:title document-to-update)))
-      (is (= (get (json/parse-string (:body response)) "text") (:text document-to-update))))))
+      (is (= (get (json/parse-string (:body response)) "text") (:description document-to-update))))))
 
   (testing "Testing document update route failed with incorrect id"
-    (let [request (mock/request :put "/documents/notfound" (json/generate-string {:id_document "noid" :title "wontwork" :text "causeIncorrectid"}))]
+    (let [request (mock/request :put "/documents/notfound" (json/generate-string {:id_document "noid" :title "wontwork" :description "causeIncorrectid"}))]
       (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 404)))))
 

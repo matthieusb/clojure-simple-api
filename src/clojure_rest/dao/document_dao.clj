@@ -12,7 +12,7 @@
 (defn get-all-documents
   "Gets all documents from the database"
   []
-  (select document-model/documents))
+  (select document-model/document))
 
 (defn get-document-by-id
   "Gets only one document using its id"
