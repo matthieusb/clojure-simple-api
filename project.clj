@@ -17,7 +17,7 @@
                  [ragtime "0.6.0"] ; migration utility
                  ]
 
-  :plugins [[lein-ring "0.12.0"]
+  :plugins [[lein-ring "0.12.1"]
             [lein-pprint "1.1.2"]
             [lein-cloverage "1.0.9"]
             [jonase/eastwood "0.2.4"]]

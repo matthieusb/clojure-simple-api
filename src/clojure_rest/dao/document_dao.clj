@@ -2,12 +2,7 @@
   (:use [korma.core :only [select insert values delete where set-fields]])
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]
-            [clojure-rest.model.document :as document-model]
-            [clojure-rest.config.database :as database]))
-
-; -----------------
-; -- Korma versions
-; -----------------
+            [clojure-rest.model.document :as document-model]))
 
 (defn get-all-documents
   "Gets all documents from the database"
@@ -17,6 +12,7 @@
 (defn get-document-by-id
   "Gets only one document using its id"
   [id-document]
+  (log/info (str "get-document-by-id dao, id: " id-document))
   (select document-model/document (where {:id_document id-document})))
 
 (defn create-new-document
@@ -29,6 +25,7 @@
 (defn update-document
   "Updates an existing document on the database"
   [id-document-to-update document-to-update]
+  (log/info (str "update-document dao, id : " id-document-to-update "; new values : " document-to-update))
   (korma.core/update document-model/document
           (set-fields document-to-update)
           (where {:id_document id-document-to-update})))
@@ -36,5 +33,6 @@
 (defn delete-document
   "Deletes an existing document on the database, returns id of deleted document"
   [id-document-to-delete]
+  (log/info (str "delete-document dao, id : " id-document-to-delete))
   (delete document-model/document
           (where {:id_document id-document-to-delete})))
