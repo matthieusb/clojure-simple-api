@@ -3,6 +3,7 @@
             [clojure-rest.controllers.document-controller :as document-controller]
             [compojure.route :as route]))
 
+
 (def document-routes
   (context "/documents" []
     (GET  "/" [] (document-controller/get-all-documents))

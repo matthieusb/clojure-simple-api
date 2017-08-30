@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"] ; Clojure version
                  [org.clojure/tools.logging "0.4.0"]
                  [compojure "1.6.0"] ; routing library
+                 [metosin/compojure-api "1.1.11"] ; for simpler compojure usage
                  [cheshire "5.8.0"] ; Json parsing librairy
                  [org.clojure/java.jdbc "0.7.0"] ; jdbc support
                  [com.h2database/h2 "1.4.196"] ; h2 database support
@@ -15,6 +16,7 @@
                  [prismatic/schema "1.1.6"] ; bean validation equivalent for clojure
                  [korma "0.4.3"] ; orm dependency
                  [ragtime "0.7.1"] ; migration utility
+                 [metosin/ring-swagger "0.24.2"] ; swagger support
                  ]
 
   :plugins [[lein-ring "0.12.1"]
