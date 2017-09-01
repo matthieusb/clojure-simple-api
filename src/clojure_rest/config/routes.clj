@@ -1,6 +1,7 @@
 (ns clojure-rest.config.routes
   (:require [compojure.core :refer :all]
             [clojure-rest.controllers.document-controller :as document-controller]
+            [compojure.api.sweet :as sweet]
             [compojure.route :as route]))
 
 
@@ -15,4 +16,5 @@
 
 (defroutes app-routes
   document-routes
+  (sweet/swagger-routes)
   (route/not-found "Not Found"))
