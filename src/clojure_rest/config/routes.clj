@@ -1,7 +1,8 @@
 (ns clojure-rest.config.routes
   (:require [compojure.core :refer :all]
+            [clojure-rest.config.swagger :as swagger-conf]
             [clojure-rest.controllers.document-controller :as document-controller]
-            [compojure.api.sweet :as sweet]
+            [ring.swagger.swagger2 :as rs]
             [compojure.route :as route]))
 
 
@@ -14,7 +15,9 @@
       (PUT    "/" {body :body} (document-controller/update-document id body))
       (DELETE "/" [] (document-controller/delete-document id)))))
 
+
+
 (defroutes app-routes
   document-routes
-  (sweet/swagger-routes)
+  swagger-conf/swagger-routes
   (route/not-found "Not Found"))
