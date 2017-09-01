@@ -2,7 +2,6 @@
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [ring.swagger.swagger2 :as rs]
             [ring.middleware.json :as ring-json]
             [clojure-rest.config.routes :as config-routes]))
 
