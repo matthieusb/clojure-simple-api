@@ -9,11 +9,16 @@
   (pk :id_document) ; primary key
   (entity-fields :id_document :title :description)) ; Default field for select
 
-; -- Validation schema
+; -- Validation schema for complete document
 (def document-schema
   {:id_document schema/Str
    :title schema/Str
    :description schema/Str})
+
+; -- Validation for input rest document
+(def document-schema-rest-in
+ {:title schema/Str
+  :description schema/Str})
 
 (defn validate-document-map
   "Creates a new document from a map, with validation"

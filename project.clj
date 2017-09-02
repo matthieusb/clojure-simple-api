@@ -20,8 +20,9 @@
 
   :plugins [[lein-ring "0.12.1"]
             [lein-pprint "1.1.2"]
-            [lein-cloverage "1.0.9"]
-            [jonase/eastwood "0.2.4"]]
+            [lein-cloverage "1.0.9"] ; Coverage for testing and coveralls
+            [jonase/eastwood "0.2.4"] ; Linter
+            [venantius/ultra "0.5.1"]] ; Colorized output
 
   :profiles { :test {:resource-paths ["resources/test"]}
               :dev
