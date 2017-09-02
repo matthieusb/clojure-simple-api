@@ -1,11 +1,9 @@
 (ns clojure-rest.config.routes
   (:require [compojure.api.sweet :refer :all]
-            [compojure.api.middleware :refer :all]
             [ring.util.http-response :refer :all]
             [clojure-rest.config.swagger :as swagger-conf]
             [clojure-rest.controllers.document-controller :as document-controller]
-            [clojure-rest.model.document :as document-model]
-            [compojure.route :as route]))
+            [clojure-rest.model.document :as document-model]))
 
 (def document-routes
   (context "/documents" []
@@ -47,4 +45,4 @@
 (defapi app-routes
    swagger-conf/swagger-routes
    document-routes
-  (route/not-found "Not Found"))
+  (undocumented(compojure.route/not-found (ok {:not "found"}))))
