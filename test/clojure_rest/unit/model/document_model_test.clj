@@ -1,5 +1,6 @@
 (ns clojure-rest.unit.model.document-model-test
   (:require [clojure.test :refer :all]
+            [schema.core :as schema]
             [clojure-rest.model.document :as document]))
 
 (def valid-document-map {:id_document "1" :title "title1" :description "text1"})
@@ -9,7 +10,7 @@
 
 (deftest test-document-validation
   (testing "Testing document validation worked"
-  (let [validation-res (document/validate-document-map valid-document-map)]
+  (let [validation-res (schema/validate valid-document-map)]
     (is (= validation-res valid-document-map))))
 
   (testing "Testing document validation failed with not enough keywords in map"
@@ -23,3 +24,11 @@
   (testing "Testing document validation failed with invalid types in map"
   (let [validation-res (document/validate-document-map wrong-document-map-invalid-types)]
     (is (= validation-res nil)))))
+
+document-schema
+document-schema-rest-in
+(defn validate-document-map
+  "Creates a new document from a map, with validation"
+  [map-input]
+  (try (schema/validate document-schema map-input)
+    (catch Exception e (log/error (str "Validation exception occured : " (.getMessage e))))))

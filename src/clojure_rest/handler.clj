@@ -5,8 +5,5 @@
             [ring.middleware.json :as ring-json]
             [clojure-rest.config.routes :as config-routes]))
 
-
-; ------------------- APP CONFIG
-
 (def app
   (-> config-routes/app-routes))

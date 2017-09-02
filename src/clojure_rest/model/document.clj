@@ -19,9 +19,3 @@
 (def document-schema-rest-in
  {:title schema/Str
   :description schema/Str})
-
-(defn validate-document-map
-  "Creates a new document from a map, with validation"
-  [map-input]
-  (try (schema/validate document-schema map-input)
-    (catch Exception e (log/error (str "Validation exception occured : " (.getMessage e))))))
