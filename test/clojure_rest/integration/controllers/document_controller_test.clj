@@ -10,8 +10,6 @@
 
 (def expected-headers {"Content-Length" "119", "Content-Type" "application/json; charset=utf-8"})
 (def initial-document-list-expected (json/generate-string [{:id_document "1" :title "title1" :description "text1"} {:id_document "2" :title "title2" :description "text2"}]))
-(def document-to-create {:id_document "dummy" :title "newDocumentTitle" :description "newDocumentText"})
-(def document-to-update {:id_document "1" :title "titre1Updated" :description "texte1Updated"})
 
 ; ------------------
 ; -- Tests on get
@@ -39,6 +37,9 @@
 ; ------------------
 ; -- Tests on create
 ; ------------------
+
+(def document-to-create {:title "newDocumentTitle" :description "newDocumentText"})
+
 (deftest test-document-controller-create
   (database/reinit-database)
 
@@ -49,8 +50,8 @@
         (is (= (:status response) 200))
         (is (= (get (json/parse-string response-body) "title") (:title document-to-create)))
         (is (= (get (json/parse-string response-body) "description") (:description document-to-create)))
-        (is (= (count (jdbc/query database/db-h2-connection ["select * from \"document\""])) 3)))))
-)
+        (is (= (count (jdbc/query database/db-h2-connection ["select * from \"document\""])) 3))))))
+
   (testing "Testing document creation route failed because of incorrect document"
     (let [request (mock/request :post "/documents" (json/generate-string {:id_document "dummy" :title "newDocumentTitle" :description "newDocumentText" :wrongattribute "badvalue"}))]
     (let [response (app (mock/content-type request "application/json"))]
@@ -59,6 +60,8 @@
 ; ------------------
 ; -- Tests on update
 ; ------------------
+(def document-to-update {:title "titre1Updated" :description "texte1Updated"})
+
 (deftest test-document-controller-update
   (database/reinit-database)
 
@@ -71,7 +74,7 @@
         (is (= (get (json/parse-string response-body) "description") (:description document-to-update)))))))
 
   (testing "Testing document update route failed with incorrect id"
-    (let [request (mock/request :put "/documents/notfound" (json/generate-string {:id_document "noid" :title "wontwork" :description "causeIncorrectid"}))]
+    (let [request (mock/request :put "/documents/notfound" (json/generate-string {:title "wontwork" :description "causeIncorrectid"}))]
       (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 404)))))
 

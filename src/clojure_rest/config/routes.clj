@@ -9,24 +9,38 @@
 
 (def document-routes
   (context "/documents" []
-    (GET  "/" []
+    (GET "/" []
           :summary "Gets all available document"
+          :return [document-model/document-schema]
+          :responses {200 {:schema [document-model/document-schema], :description "List of documents"}}
           (document-controller/get-all-documents))
-    (GET    "/:id" []
+    (GET "/:id" []
             :path-params [id :- String]
+            :return document-model/document-schema
+            :responses {200 {:schema document-model/document-schema, :description "The document found"}
+                        404 {:description "No document found for this id"}}
             :summary "Gets a specific document by id"
             (document-controller/get-document id))
     (POST "/" []
-          :body [document document-model/document-schema]
+          :body [document document-model/document-schema-rest-in]
+          :return document-model/document-schema
+          :responses {200 {:schema document-model/document-schema, :description "Returns the created document"}
+                      400 {:description "Malformed request body"}}
           :summary "Creates new document"
           (document-controller/create-new-document document))
-    (PUT    "/:id" []
+    (PUT "/:id" []
             :path-params [id :- String]
-            :body [document document-model/document-schema]
+            :body [document document-model/document-schema-rest-in]
+            :return document-model/document-schema
+            :responses {200 {:schema document-model/document-schema, :description "The updated document"}
+                        400 {:description "Malformed request body"}
+                        404 {:description "No document found for this id"}}
             :summary "Updates and existing document by id"
             (document-controller/update-document id document))
     (DELETE "/:id" []
             :path-params [id :- String]
+            :responses {204 {:description "Document successfuly deleted"}
+                        404 {:description "No document found for this id"}}
             :summary "Updates and existing document by id"
             (document-controller/delete-document id))))
 
