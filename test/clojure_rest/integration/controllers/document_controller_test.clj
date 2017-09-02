@@ -13,6 +13,9 @@
 (def document-to-create {:id_document "dummy" :title "newDocumentTitle" :description "newDocumentText"})
 (def document-to-update {:id_document "1" :title "titre1Updated" :description "texte1Updated"})
 
+; ------------------
+; -- Tests on get
+; ------------------
 (deftest test-document-controller-list
   (database/reinit-database)
 
@@ -33,6 +36,9 @@
     (let [response (app (mock/request :get "/documents/notfound"))]
       (is (= (:status response) 404)))))
 
+; ------------------
+; -- Tests on create
+; ------------------
 (deftest test-document-controller-create
   (database/reinit-database)
 
@@ -50,6 +56,9 @@
     (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 400))))))
 
+; ------------------
+; -- Tests on update
+; ------------------
 (deftest test-document-controller-update
   (database/reinit-database)
 
@@ -71,6 +80,9 @@
       (let [response (app (mock/content-type request "application/json"))]
       (is (= (:status response) 400))))))
 
+; ------------------
+; -- Tests on delete
+; ------------------
 (deftest test-document-controller-delete
   (database/reinit-database)
   (testing "Testing document delete route worked"

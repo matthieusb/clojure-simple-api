@@ -20,21 +20,17 @@
 (defn create-new-document
   "Adds a new document to the database, returns the id if ok, null if invalid"
   [document-to-create]
-  (let [valid-document (document/validate-document-map document-to-create)]
-    (if (nil? valid-document) nil
     (let [id (uuid)]
       (let [document (assoc document-to-create :id_document id)]
         (document-dao/create-new-document document)
-        id)))))
+        id)))
 
 (defn update-document
   "Updates an existing document on the database"
   [id-document-to-update document-to-update]
-  (let [valid-document (document/validate-document-map document-to-update)]
-    (if (nil? valid-document) nil
-      (let [document (assoc document-to-update :id_document id-document-to-update)]
-        (document-dao/update-document id-document-to-update document-to-update)
-        id-document-to-update))))
+    (let [document (assoc document-to-update :id_document id-document-to-update)]
+      (document-dao/update-document id-document-to-update document-to-update)
+      id-document-to-update))
 
 (defn delete-document
   "Deletes an existing document on the database, returns id of deleted document"
