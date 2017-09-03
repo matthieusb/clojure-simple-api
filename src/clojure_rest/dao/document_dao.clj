@@ -25,7 +25,8 @@
 (defn update-document
   "Updates an existing document on the database"
   [id-document-to-update document-to-update]
-  (log/info (str "update-document dao, id : " id-document-to-update "; new values : " document-to-update))
+  (log/info (str "update-document dao, id : " id-document-to-update))
+  (log/info (str "New values for update : " document-to-update))
   (korma.core/update document-model/document
           (set-fields document-to-update)
           (where {:id_document id-document-to-update})))

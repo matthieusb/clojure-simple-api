@@ -22,10 +22,9 @@
             [lein-pprint "1.1.2"]
             [lein-cloverage "1.0.9"] ; Coverage for testing and coveralls
             [jonase/eastwood "0.2.4"] ; Linter
+            [lein-bikeshed "0.4.1"] ; Another linter
             [venantius/ultra "0.5.1"] ; Colorized test output
             ]
-
-
 
   :profiles { :test {:resource-paths ["resources/test"]}
               :dev
@@ -35,6 +34,14 @@
                                     ]}}
 
   :ring { :handler clojure-rest.handler/app}
+
+  :eastwood {:exclude-linters [:constant-test]
+             :include-linters [:deprecations]
+             :exclude-namespaces [clojure-rest.config.routes]
+             ;:debug [:all]
+             ;:out "eastwood-warnings.txt"
+             }
+  :bikeshed {:max-line-length 100}
 
   :aliases {"migrate"  ["run" "-m" "clojure-rest.config.database/ragtime-migrate"]
             "rollback" ["run" "-m" "clojure-rest.config.database/ragtime-rollback"]})

@@ -1,5 +1,4 @@
 (ns clojure-rest.integration.controllers.document-controller-test
-  (:use [korma.core :only [select insert values where]])
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
             [cheshire.core :as json]

@@ -5,5 +5,4 @@
             [ring.middleware.json :as ring-json]
             [clojure-rest.config.routes :as config-routes]))
 
-(def app
-  (-> config-routes/app-routes))
+(def app config-routes/app-routes)
