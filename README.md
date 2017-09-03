@@ -45,6 +45,18 @@ lein ring server
 The application resorts to an h2 database for both testing and running, since it is just a demonstration.
 You don't need to start a database or anything, everything is stored temporarily in the *resources*/**env**/*db* folder.
 
+## Packaging
+To package this application for production, use the following command :
+
+```
+lein ring uberjar
+```
+
+**However** do not forget to :
+  - Add production paths for resources to project.clj
+  - Add a production folder to the project in resources, containing corresponding configuration files 
+
+
 ## License
 
 Apache 2.0 License
