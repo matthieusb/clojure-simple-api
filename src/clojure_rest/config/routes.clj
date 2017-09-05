@@ -6,7 +6,7 @@
             [clojure-rest.model.document :as document-model]))
 
 (def document-routes
-  (context "/documents" []
+  (context "/documents" [] :tags ["api-documents"]
     (GET "/" []
           :summary "Gets all available document"
           :return [document-model/document-schema]
