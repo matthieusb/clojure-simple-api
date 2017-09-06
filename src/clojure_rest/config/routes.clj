@@ -49,4 +49,4 @@
 (defapi app-routes
    swagger-conf/swagger-routes
    document-routes
-  (undocumented(compojure.route/not-found (ok {:not "found"}))))
+  (undocumented (compojure.route/not-found (ok {:not "found"}))))
