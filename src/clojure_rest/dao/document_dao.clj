@@ -1,7 +1,6 @@
 (ns clojure-rest.dao.document-dao
   (:use [korma.core :only [select insert values delete where set-fields]])
-  (:require [clojure.java.jdbc :as jdbc]
-            [clojure.tools.logging :as log]
+  (:require [clojure.tools.logging :as log]
             [clojure-rest.model.document :as document-model]))
 
 (defn get-all-documents
