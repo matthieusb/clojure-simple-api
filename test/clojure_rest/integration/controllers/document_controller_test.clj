@@ -46,7 +46,7 @@
     (let [request (mock/request :post "/documents" (json/generate-string document-to-create))]
     (let [response (app (mock/content-type request "application/json"))]
       (let [response-body (slurp (:body response))]
-        (is (= (:status response) 200))
+        (is (= (:status response) 201))
         (is (= (get (json/parse-string response-body) "title") (:title document-to-create)))
         (is (= (get (json/parse-string response-body) "description") (:description document-to-create)))
         (is (= (count (jdbc/query database/db-h2-connection ["select * from \"document\""])) 3))))))

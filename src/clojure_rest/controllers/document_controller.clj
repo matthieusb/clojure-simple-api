@@ -1,6 +1,7 @@
 (ns clojure-rest.controllers.document-controller
   (:use [ring.util.response :only [response]])
   (:require [compojure.core :refer :all]
+            [ring.util.http-response :refer :all]
             [compojure.route :as route]
             [clojure.java.jdbc :as jdbc]
             [clojure.tools.logging :as log]
@@ -18,13 +19,13 @@
   (log/info (str "get-document with id : " id))
   (let [results (document-service/get-document-by-id id)]
     (cond (empty? results) {:status 404}
-      :else (response (first results)))))
+      :else (ok (first results)))))
 
 (defn create-new-document [doc]
   (log/info (str "create-new-document : " doc))
   (let [id-document-created (document-service/create-new-document doc)]
     (if (nil? id-document-created) {:status 400}
-      (get-document id-document-created))))
+       (created (str "/documents/" id-document-created) (first (document-service/get-document-by-id id-document-created))))))
 
 (defn update-document [id doc]
   (log/info (str "update-document with id : " id ". New values : " doc))

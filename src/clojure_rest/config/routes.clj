@@ -24,7 +24,7 @@
     (POST "/" []
           :body [document document-model/document-schema-rest-in]
           :return document-model/document-schema
-          :responses {200 {:schema document-model/document-schema,
+          :responses {201 {:schema document-model/document-schema,
                            :description "Returns the created document"}
                       400 {:description "Malformed request body"}}
           :summary "Creates new document"
