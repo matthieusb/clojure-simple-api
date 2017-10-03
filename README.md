@@ -54,8 +54,11 @@ lein ring uberjar
 
 **However** do not forget to :
   - Add production paths for resources to project.clj
-  - Add a production folder to the project in resources, containing corresponding configuration files 
+  - Add a production folder to the project in resources, containing corresponding configuration files
 
+## Quick look
+
+![](swagger_screenshot.png?raw=true)
 
 ## License
 
