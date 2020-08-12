@@ -32,8 +32,8 @@
                      :dependencies [[javax.servlet/servlet-api "2.5"]
                                     [ring/ring-mock "0.3.1"]
                                     ]
-                     :ring {:port 8080}}
-              :uberjar {:ring {:port 80}}}
+                     :ring {:port 4000}}
+              :uberjar {:ring {:port 4000}}}
 
   :ring { :handler clojure-rest.handler/app}
 
