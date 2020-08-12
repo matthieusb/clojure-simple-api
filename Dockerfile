@@ -4,5 +4,5 @@ WORKDIR /usr/src/app
 COPY project.clj /usr/src/app/
 RUN lein deps
 COPY . /usr/src/app
-RUN mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
-CMD ["java", "-jar", "app-standalone.jar"]
+RUN lein ring uberjar
+CMD ["java", "-jar", "target/clojure-rest-0.1.0-SNAPSHOT-standalone.jar"]
