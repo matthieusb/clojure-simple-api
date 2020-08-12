@@ -1,4 +1,4 @@
-FROM clojure
+FROM clojure:openjdk-8-lein-2.8.3
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY project.clj /usr/src/app/
